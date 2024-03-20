@@ -3,116 +3,154 @@ package org.iesvdm;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AlturaAlumnoTest {
-    @Test
-    void verdadero() {
-        assertTrue(1==1);
-    }
 
+    /* aniadeNombre */
 
-    @Test
-    void aniadeNombreTest1() {
+    @Test void aniadeNombre (){
 
+        /*when : */
+        String[] array = new String[0];
+        String nombre = "jose";
 
-        final String[] array = new String[2];
+        /*do : */
+        String[] nuevo = AlturaAlumno.aniadeNombre(array, nombre);
 
-        array[0]="Jose";
-        array[1]="Paco";
+        /*then : */
+        String[] result = AlturaAlumno.aniadeNombre(array, nombre);
+        assertEquals(array.length,nuevo.length-1);
+        assertArrayEquals(result, nuevo);
 
-        String nombre = "María";
-        String[] arrayActual = AlturaAlumno
-                .añadeNombre(array, nombre);
-
-        assertTrue(arrayActual[arrayActual.length-1]
-                    .equals(nombre) );
-
-        for (int i = 0; i< array.length;i++)
-            assertEquals(array[i], arrayActual[i]);
-
-//        String[] arrayExpected = Arrays.copyOf(array, array.length+1);
-//        arrayExpected[arrayExpected.length-1]=nombre;
-//
-//        assertArrayEquals(arrayExpected, arrayActual);
+        // Preguntar si el ejercicio esta bien
 
     }
 
-    @Test
-    void aniadeNombreTest2() {
+    /* aniadeAltura */
 
+    @Test void aniadeAltura (){
 
-        final String[] array = new String[0];
-        int longInicial = array.length;
+        /*when : */
+        double[] array = {1.3, 2.5, 6.31};
+        double altura = 1.5;
 
-        String nombre = "María";
-        String[] arrayActual = AlturaAlumno
-                .añadeNombre(array, nombre);
+        /*do : */
+        double[] nuevo = new double[array.length+1];
+        nuevo[array.length-1] = altura;
+        double[] result = new double[nuevo.length];
+        result[array.length-1] = altura;
 
-//        assertTrue(arrayActual[arrayActual.length-1]
-//                .equals(nombre) );
-        assertEquals(longInicial+1, arrayActual.length);
-        assertEquals(nombre, arrayActual[longInicial+1]);
+        /*then : */
+        assertEquals(array.length, result.length-1);
+        assertArrayEquals(nuevo, result);
+
+        // Preguntar si el ejercicio esta bien
 
     }
 
-    @Test
-    void modificaAlturaPosicionEnElArray() {
+    /* modificaAltura */
 
-        //When (Cuando)
-        double[] array = {1.6, 1.8, 1.7};
-        double[] array2 = Arrays.copyOf(array,array.length);
-        int posicion = 1;
-        double altura = 1.9;
+    @Test void modificaAltura (){
 
+        /*when : */
+        double[] array = {1.3, 2.5, 4.1};
+        double altura = 5.1;
+        int pos = 2;
 
-        //Do (Hacer)
-        AlturaAlumno.modificaAltura(array, posicion, altura);
-
-
-        //Then (Entonces)
-
-        //altura esta en la posicion
-        assertTrue( altura == array[posicion]);
-
-        //Todos los demas elementos del array no cambian
-        for (int i = 0; i < array.length; i++) {
-            if (i != posicion) {
-                assertEquals(array[i], array2[i]);
-            }
+        /*do : */
+        double[] nuevo = new double[array.length];
+        for (int i = 0; i < array.length; i++){
+            array[i] = nuevo [i];
         }
+        nuevo[pos] = altura;
+        double[] result = new double[array.length];
+        result[pos] = altura;
+
+        /*then : */
+        assertEquals(array.length, result.length);
+        assertArrayEquals(nuevo, result);
+
+        // Preguntar si el ejercicio esta bien
 
     }
 
-    @Test
-    void modificaAlturaPosicionFueraDeRangoArray() {
+    /* buscaNombre */
 
-        //When (Cuando)
-        double[] array = {1.6, 1.8, 1.7};
-        double[] array2 = Arrays.copyOf(array,array.length);
-        int posicion = array.length+2;
-        double altura = 1.9;
+    @Test void buscaNombre (){
 
+        /*when : */
+        String[] nombres = {"jose","cesar","alan"};
+        String nombre = "cesar";
+        int indice = 1;
 
-        //Do (Hacer)
-        AlturaAlumno.modificaAltura(array, posicion, altura);
+        /*do : */
+        int result = AlturaAlumno.buscaNombre(nombres, nombre);
 
-
-        //Then (Entonces)
-
-        //altura esta en la posicion
-        //assertTrue( altura == array[posicion]);
-
-        //Todos los demas elementos del array no cambian
-//        for (int i = 0; i < array.length; i++) {
-//                assertEquals(array[i], array2[i]);
-//        }
-        assertArrayEquals(array2, array);
+        /*then : */
+        assertEquals(indice, result);
 
     }
 
+    @Test void buscaNombreNoEncontrado (){
 
+        /*when : */
+        String[] nombres = {"jose","cesar","alan"};
+        String nombre = "cristina";
+        int indice = -1;
+
+        /*do : */
+        int result =AlturaAlumno.buscaNombre(nombres, nombre);
+
+        /*then : */
+        assertEquals(indice, result);
+
+    }
+
+    /* mostrar */
+
+    @Test void mostrar () {
+
+        /*when : */
+
+
+        /*do : */
+
+
+        /*then : */
+
+
+    }
+
+    /* calculaMaximo */
+
+    @Test void calculaMaximo (){
+
+        /*when : */
+
+
+        /*do : */
+
+
+        /*then : */
+
+    }
+
+    /* calculaMedia */
+
+    @Test void calculaMedia (){
+
+        /*when : */
+
+
+        /*do : */
+
+
+        /*then : */
+
+    }
 
 }
