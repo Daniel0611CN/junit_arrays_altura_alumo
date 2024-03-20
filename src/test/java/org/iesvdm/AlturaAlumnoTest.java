@@ -15,19 +15,16 @@ public class AlturaAlumnoTest {
     @Test void aniadeNombre (){
 
         /*when : */
-        String[] array = new String[0];
+        String[] array = {"dani"};
         String nombre = "jose";
 
         /*do : */
-        String[] nuevo = AlturaAlumno.aniadeNombre(array, nombre);
+        String[] result = AlturaAlumno.aniadeNombre(array, nombre);
 
         /*then : */
-        String[] result = AlturaAlumno.aniadeNombre(array, nombre);
-        assertEquals(array.length,nuevo.length-1);
-        assertArrayEquals(result, nuevo);
-
-        // Preguntar si el ejercicio esta bien
-
+        assertTrue(result[0] == array[0]);
+        assertTrue(result[result.length-1] == nombre);
+        System.out.println("El array ha añadido el nombre " + nombre);
     }
 
     /* aniadeAltura */
@@ -35,20 +32,18 @@ public class AlturaAlumnoTest {
     @Test void aniadeAltura (){
 
         /*when : */
-        double[] array = {1.3, 2.5, 6.31};
+        double[] array = {2.1};
         double altura = 1.5;
 
         /*do : */
-        double[] nuevo = new double[array.length+1];
-        nuevo[array.length-1] = altura;
-        double[] result = new double[nuevo.length];
-        result[array.length-1] = altura;
+        double[] result = AlturaAlumno.aniadeAltura(array);
+        result[result.length-1]=altura;
 
         /*then : */
-        assertEquals(array.length, result.length-1);
-        assertArrayEquals(nuevo, result);
+        assertTrue(array[0]==result[0]);
+        assertTrue(result[result.length-1] == altura);
 
-        // Preguntar si el ejercicio esta bien
+        System.out.println("El array ha añadido la altura " + altura);
 
     }
 
@@ -57,24 +52,18 @@ public class AlturaAlumnoTest {
     @Test void modificaAltura (){
 
         /*when : */
-        double[] array = {1.3, 2.5, 4.1};
-        double altura = 5.1;
-        int pos = 2;
+        double[] array = {1.5, 2.3};
+        double altura = 3.4;
+        int pos = 1;
 
         /*do : */
-        double[] nuevo = new double[array.length];
-        for (int i = 0; i < array.length; i++){
-            array[i] = nuevo [i];
-        }
-        nuevo[pos] = altura;
-        double[] result = new double[array.length];
-        result[pos] = altura;
+        double[] result = AlturaAlumno.modificaAltura(array, pos, altura);
 
         /*then : */
-        assertEquals(array.length, result.length);
-        assertArrayEquals(nuevo, result);
+        assertTrue(array[0] == result[0]);
+        assertTrue(result[result.length-1] == altura);
 
-        // Preguntar si el ejercicio esta bien
+        System.out.println("El array modificado es: " + Arrays.toString(result));
 
     }
 

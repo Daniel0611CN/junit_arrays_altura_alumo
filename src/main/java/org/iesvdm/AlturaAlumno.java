@@ -161,15 +161,18 @@ public class AlturaAlumno { // Recorrer dos arrays con la misma longitud
 
     /**
      * Modifica la altura de una posicion dada del array por un valor tambien dado
+     *
      * @param array,posicion,altura
+     * @return
      */
-    static void modificaAltura(double[] array, int posicion, double altura)
+    static double[] modificaAltura(double[] array, int posicion, double altura)
     {
         if(posicion>=0 && posicion<array.length) // Controlo que la posicion no esté fuera del rango
         {
             array[posicion] = altura;
         }
 
+        return array;
     }
 
     /**
