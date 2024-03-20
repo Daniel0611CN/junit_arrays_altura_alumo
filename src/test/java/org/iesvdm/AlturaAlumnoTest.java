@@ -102,7 +102,7 @@ public class AlturaAlumnoTest {
     /* mostrar */
 
     @Test void mostrar () {
-a
+
         /*when : */
 
 
