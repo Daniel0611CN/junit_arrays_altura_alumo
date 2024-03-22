@@ -1,12 +1,15 @@
 package org.iesvdm;
 
+/*
+* @author Daniel Clavijo Núñez;
+*/
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AlturaAlumnoTest {
 
@@ -14,32 +17,16 @@ public class AlturaAlumnoTest {
 
     @Test void aniadeNombre (){
 
-        /*when : */
-
-        /* Definimos las variables. */
-
+        /*given : */
         String[] array = {"dani"};
         String nombre = "jose";
 
-        /*do : */
-
-        /* Creamos un array result, que copie las propiedades de array, y añada el nombre. */
-
+        /*when : */
         String[] result = AlturaAlumno.aniadeNombre(array, nombre);
 
         /*then : */
-
-        /* Aquí comprobamos que ambos arrays tengan en la posición 0, el mismo dato. */
-
-        assertTrue(result[0] == array[0]);
-
-        /* Además, el nombre debe estar en la última posición del array result. */
-
-        assertTrue(result[result.length-1] == nombre);
-
-        /* Finalmente imprimimos el mensaje por pantalla. */
-
-        System.out.println("El array ha añadido el nombre " + nombre);
+        assertTrue(result[0] == array[0]); // comprueba pos 0 result == pos 0 array;
+        assertTrue(result[result.length-1] == nombre); // comprueba last pos result == nombre;
         
     }
 
@@ -47,19 +34,17 @@ public class AlturaAlumnoTest {
 
     @Test void aniadeAltura (){
 
-        /*when : */
+        /*given : */
         double[] array = {2.1};
         double altura = 1.5;
 
-        /*do : */
+        /*when : */
         double[] result = AlturaAlumno.aniadeAltura(array);
-        result[result.length-1]=altura;
+        result[result.length-1]=altura; // last pos result == altura;
 
         /*then : */
         assertTrue(array[0]==result[0]);
         assertTrue(result[result.length-1] == altura);
-
-        System.out.println("El array ha añadido la altura " + altura);
 
     }
 
@@ -67,43 +52,36 @@ public class AlturaAlumnoTest {
 
     @Test void modificaAltura (){
 
-        /*when : */
+        /*given : */
         double[] array = {1.5, 2.3};
         double altura = 3.4;
         int pos = 1;
 
-        /*do : */
+        /*when : */
         double[] result = AlturaAlumno.modificaAltura(array, pos, altura);
 
         /*then : */
         assertEquals(altura, array[pos]);
         assertTrue(result[pos] == altura);
 
-        System.out.println("El array modificado es: " + Arrays.toString(result));
-
     }
 
     @Test void modificaAlturaNoValido (){
 
-        /*when : */
+        /*given : */
         double[] array = {1.5, 2.3, 3.2, 5.1, 7.6};
         double altura = 3.4;
         int pos = 8;
 
         if (pos>=0 && pos<= array.length){
 
-            /*do : */
+            /*when : */
             double[] result = AlturaAlumno.modificaAltura(array, pos, altura);
 
             /*then : */
             assertTrue(array[0] == result[0]);
             assertTrue(result[pos] == altura);
 
-            System.out.println("El array modificado es: " + Arrays.toString(result));
-
-        }
-        else {
-            System.out.println("El array no se ha podido modificar, la posición no es válida.");
         }
 
     }
@@ -112,27 +90,27 @@ public class AlturaAlumnoTest {
 
     @Test void buscaNombre (){
 
-        /*when : */
+        /*given : */
         String[] nombres = {"jose","cesar","alan"};
         String nombre = "cesar";
         int indice = 1;
 
-        /*do : */
+        /*when : */
         int result = AlturaAlumno.buscaNombre(nombres, nombre);
 
         /*then : */
-        assertEquals(indice, result);
+        assertEquals(indice, result); // comprueba index == result;
 
     }
 
     @Test void buscaNombreNoEncontrado (){
 
-        /*when : */
+        /*given : */
         String[] nombres = {"jose","cesar","alan"};
         String nombre = "cristina";
         int indice = -1;
 
-        /*do : */
+        /*when : */
         int result =AlturaAlumno.buscaNombre(nombres, nombre);
 
         /*then : */
@@ -142,45 +120,27 @@ public class AlturaAlumnoTest {
 
     /* mostrar */
 
-    @Test void mostrar () {
+    @Test void givenNamesAndHeightsWhenMostrarThenPrint () {
 
-        /* Este test, no se si está bien profe, porque no se
-        * si solo hace falta el assert de abajo o si hace falta comprobar otra cosa. */
+    /*attributes : */
 
-        /*when : */
+    // Indica si el output del array ha sido true o false;
+    final PrintStream standardOut = System.out;
+    final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-        /* Definimos las variables. */
+    System.setOut(new PrintStream(outputStreamCaptor));
 
-        String[] arraynombre = {"pepe", "paco", "dani", "angel", "cesar"};
-        double[] arrayAltura = {1.2, 5.1, 8.6, 6.3, 10.2};
+    /*given : */
+    String[] nombres = {"Angel", "Dani"}; // Array de String - Nombres;
+    double[] alturas = {1.68, 1.75}; // Array de double - Alturas;
 
-        /*do : */
+    /*when : */
+    AlturaAlumno.mostrar(nombres, alturas); // Llamamos al método;
 
-        /* Aqui no se pone nada, ya que al tener que comprobar
-        * unicamente si el array no está vacío, pues no hace falta.
-        * Ademas es porque el metodo es void, por lo que no podemos
-        * asignar un tipo de dato al array result. */
-
-        /*then : */
-
-        /* Aqui se comprueba si el array tiene mas de 0 posiciones
-        * en ese caso el metodo funcionaria correctamente.
-        * En caso contrario, indicaria que lo esperado es que devuelva
-        * true, pero sin embargo, al ser menor que 0, devuelve false. */
-
-        assertTrue(arraynombre.length>0);
-
-        /* Por último, debemos imprimir por pantalla el mensaje,
-        * para comprobar que el método ha funcionado correctamente. */
-
-        System.out.println("Se han impreso los arrays.");
-
-        /* Además, aunque no es necesario, el ejercicio comprueba
-        * si ambos arrays tienen la misma longitud, y lo muestra por pantalla. */
-
-        if (arraynombre.length == arrayAltura.length){
-            System.out.println("Ambos arrays tienen la misma longitud.");
-        }
+    /*then : */
+    assertEquals("Angel" + "\t|   " + "1.68\r\n" +
+            "Dani" + "\t|   " + "1.75\r\n", outputStreamCaptor.toString());
+    assertTrue(outputStreamCaptor.toString().contains("Dani"));
 
     }
 
@@ -188,106 +148,35 @@ public class AlturaAlumnoTest {
 
     @Test void calculaMaximo (){
 
+        /*given : */
+        int pos = 3; // double pos = 1;
+        double[] array = {1.5, 4.2, 5.1, 8.3, 7.6};
+        double maximo = array[pos]; // double maximo = array[1];
+
         /*when : */
-
-        /* Aquí he realizado un cambio, para que el valor de la posición,
-        * no tenga que ponerse en el máximo, es por eso que lo he cambiado a int. */
-
-        int pos = 1;
-        double[] array = {1.5, 4.2};
-        double maximo = array[pos];
-
-        /*do : */
-
         double[] result = AlturaAlumno.calculaMaximo(array);
 
-        /* Aquí asignamos al array los valores de la posición y el máximo, como indica el método. */
-
-        result[0] = pos;
-        result[1] = maximo;
-
         /*then : */
+        assertTrue(array.length>0); // longitud array mayor a cero;
+        assertTrue(pos>=0 && pos<array.length); // posición mayor que cero y menor que longitud del array;
 
-        /* Comprobamos que el array tenga una longitud mayor que cero. */
-
-        assertTrue(array.length>0);
-
-        /* Comprobamos que el máximo esté en la posición indicada en el array. */
-
-        assertTrue(maximo == array[pos]);
-
-        /* Comprobamos que el valor de la posición sea mayor o igual a 0,
-        * y menor (o menor e igual) que la longitud del array result. */
-
-        assertTrue(pos>=0 && pos<result.length);
-
-        /* Por último, imprimimos por pantalla los resultados. */
-
-        System.out.println("El maximo esta en la posicion " + pos + " , y es " + maximo + ".");
-        System.out.println("El array es: " + Arrays.toString(result));
-
-        /* Ejercicio realizado de otra forma
-        * CAMBIOS:
-        *
-        * when :
-        *
-        * double maximo = array[1];
-        * double pos = 1;
-        *
-        * then :
-        *
-        * assertTrue(maximo == array[1]); */
-
-        /* Además, podríamos crear otro @Test, que compruebe que el método no es correcto,
-        * ya que la posición es mayor a la del array, o menor a cero. */
+        /* Lo más importante que debemos comprobar en este Test es que result[0]==pos, y result[1]==maximo; */
+        assertEquals(result[0], pos);
+        assertEquals(result[1], maximo);
 
     }
 
-    @Test void calculaMaximoNoValido (){
+    @Test void calculaMaximoLongitudCero (){
+
+        /*given : */
+        double[] array = new double[0]; // posiciones = 0;
 
         /*when : */
-
-        /* Aquí es necesario poner double, ya que pos y maximo, que es igual a array[pos],
-        * deben tener un valor diferente, para que se imprima el mensaje por pantalla. */
-
-        /* double pos = -2; También sería válido. */
-
-        double pos = 5;
-        double[] array = {1.5, 4.2};
-        double maximo = array[1];
-
-        /*do : */
-
-        double[] result = AlturaAlumno.calculaMaximo(array);
-
-        /* Aqui asignamos al array los valores de la posicion y el maximo, como indica el metodo. */
-
-        result[0] = pos;
-        result[1] = maximo;
+        double[] result = AlturaAlumno.calculaMaximo(array); // creamos un array double - result;
 
         /*then : */
-
-        /* Comprobamos que el array tenga una longitud mayor que cero. */
-
-        assertTrue(array.length>0);
-
-        System.out.println("El array tiene más de 0 posiciones.");
-
-        /* Comprobamos que el valor de la posición sea menor que 0,
-         * y mayor (o mayor e igual) que la longitud del array result. */
-
-        assertTrue(pos<0 || pos>result.length);
-
-        if (pos<0) {
-            System.out.println("La posición es menor a 0.");
-        } else if (pos>result.length){
-            System.out.println("La posición es mayor a la longitud del array.");
-        } else if (pos == result.length) {
-            System.out.println("La posición es igual a la longitud del array.");
-        }
-
-        /* Por último, imprimimos por pantalla los resultados. */
-        System.out.println("No se ha podido calcular el máximo.");
+        assertEquals(result[0], 0.0); // pos 0 array = 0.0;
+        assertEquals(result[1], 0.0);
 
     }
 
@@ -296,20 +185,28 @@ public class AlturaAlumnoTest {
     @Test void calculaMedia (){
 
         /*when : */
-        double[] array = {5.3, 8.5, 9.1, 7.2};
-        double suma = (5.3 + 8.5 + 9.1 + 7.2);
-        double media = (suma/array.length);
+        double[] array = {5.0, 2.0};
+        double media = 3.5; // suma elementos del array / array.length;
 
         /*do : */
-        double result = AlturaAlumno.calculaMedia(array);
+        double result = AlturaAlumno.calculaMedia(array); // result == media;
 
         /*then : */
-        assertTrue(array.length>0);
-
+        assertTrue(array.length>0); // comprueba longitud array > 0;
+        assertEquals(result, media); // comprueba result == media;
 
     }
 
-    @Test void calculaMediaNoValido (){
+    @Test void calculaMediaLongitudCero (){
+
+        /*given : */
+         double[] array = new double[0]; // posiciones = 0;
+
+        /*when : */
+        double result = AlturaAlumno.calculaMedia(array); // double result == array;
+
+        /*then : */
+        assertEquals(0.0, result); // comprueba result == 0.0;
 
     }
 
